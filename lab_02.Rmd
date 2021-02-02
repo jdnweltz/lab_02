@@ -19,8 +19,7 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE,
 ## Shell commands
 
 In this repo is a zip file named `organize_me.zip`. It can by unzipped by
-running R code `unzip("organize_me.zip")`. Do this in your console so you only 
-unzip the folder once and not each time you knit the Rmd file.
+running R code `unzip("organize_me.zip")`. Do this in your console so you only unzip the folder once and not each time you knit the Rmd file.
 
 The files in `organize_me/` contain a sample of various files you may have if 
 you run a simulation on a high performance computer. Organize the contents in
@@ -44,6 +43,10 @@ need to set the class attribute to `"POSIXct"`
 
 ```{r}
 z <- seq(0, 3600 * 10, by = 3600)
+z
+attr(z, which = "class") = "POSIXct"
+
+z
 ```
 
 What do you notice about the date-time? If you are unsure, check out
@@ -59,7 +62,14 @@ Consider the atomic vector `x`.
 ```{r}
 set.seed(0826) # set seed to ensure reproducibility
 x <- sample(x = c(letters, -15:15), size = 50, replace = TRUE)
-x
+x[x %in% letters]
+numbs <- x[!(x %in% letters)]
+numbs[as.numeric(numbs) <0]
+numbs[as.numeric(numbs) %% 3 == 0]
+evens = numbs[as.numeric(numbs) %% 2 == 0]
+
+rm_evens = x[!(x %in% evens)]
+rm_evens
 ```
 
 Complete the following without using any loops.
